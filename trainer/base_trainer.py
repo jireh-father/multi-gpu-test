@@ -170,7 +170,8 @@ class Trainer:
             num_validation_sample = util.count_records(validation_filenames)
 
             self.config.num_validation_sample = num_validation_sample
-        tf_config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)
+        # tf_config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)
+        tf_config = tf.ConfigProto(allow_soft_placement=True)
         tf_config.gpu_options.allow_growth = True
         self.sess = tf.Session(config=tf_config)
 
@@ -321,7 +322,7 @@ class Trainer:
                     print(
                         "[%s TRAIN] [Epoch: %3d] [Current Step: %4d / %4d]" % (
                             now, epoch, step + 1, total_steps))
-                    print(loss)
+                    # print(loss)
 
                     if self.config.use_summary:
                         summary = self.sess.run(self.summary_op,
