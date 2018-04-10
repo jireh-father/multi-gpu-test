@@ -129,9 +129,9 @@ def build_model_multiple(config, dataset, model_f, is_training):
                         tower_grads.append(loss)
     grads = average_gradients(tower_grads)
     apply_gradient_op = opt.apply_gradients(grads, global_step=global_step)
+
     variable_averages = tf.train.ExponentialMovingAverage(config.moving_average_decay, global_step)
     variables_averages_op = variable_averages.apply(tf.trainable_variables())
-
     # Group all updates to into a single train op.
     train_op = tf.group(apply_gradient_op, variables_averages_op)
 

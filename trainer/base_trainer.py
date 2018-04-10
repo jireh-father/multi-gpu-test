@@ -529,5 +529,6 @@ class Trainer:
 
 
 def main(config):
-    trainer = Trainer(config)
-    trainer.run()
+    with tf.device('/cpu:0'):
+        trainer = Trainer(config)
+        trainer.run()
